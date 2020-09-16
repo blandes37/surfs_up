@@ -13,16 +13,16 @@ engine = create_engine("sqlite:///hawaii.sqlite")
 Base = automap_base()
 Base.prepare(engine, reflect=True)
 
-
-Station = Base.classes.station
 Measurement = Base.classes.measurement
+Station = Base.classes.station
+
 
 session = Session(engine)
 
 app = Flask(__name__)
 
 @app.route("/")
-def welcom():
+def welcome():
     return(
         '''
     Welcome to the Climate Analysis API!
