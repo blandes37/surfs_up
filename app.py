@@ -17,8 +17,8 @@ Station = Base.classes.station
 session = Session(engine)
 
 app = Flask(__name__)
-@app.route("/")
 
+@app.route("/")
 def welcome():
     test = (
         f"Welcome to the Hawaii Climate Analysis API!<br/>"
@@ -37,3 +37,10 @@ def precipitation():
     filter(Measurement.date >= prev_year).all()
    precip = {date: prcp for date, prcp in precipitation}
    return jsonify(precip)
+
+@app.route("/apiav1.0/stations")
+def stations():
+    results = session.query(Station.station).all()
+    stations = list(np.ravel(results))
+    return jsonify(stations=stations)
+
